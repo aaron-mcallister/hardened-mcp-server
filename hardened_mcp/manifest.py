@@ -1,7 +1,7 @@
 """The tool manifest, pinned.
 
 A malicious or compromised server can change a tool's description after a user has approved it (a "rug
-pull"), or smuggle instructions into a description (tool poisoning). The server-side defence is to make
+pull"), or smuggle instructions into a description (tool poisoning). The server-side defense is to make
 descriptions static and reviewed: the manifest below is hashed, the hash is committed in `manifest.lock.json`,
 and a test fails if anything changes without a deliberate `--update`. Clients that want the same protection
 can pin the hash on their side.

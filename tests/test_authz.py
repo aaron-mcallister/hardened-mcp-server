@@ -219,7 +219,7 @@ def test_note_length_and_count_are_bounded(env, idp):
     )["isError"]
 
 
-# ---- defence in depth: the handlers protect themselves -------------------------------------------------
+# ---- defense in depth: the handlers protect themselves -------------------------------------------------
 
 
 def _call_directly(principal, name, arguments):

@@ -131,7 +131,7 @@ class McpGuard:
         hdrs = _headers(scope)
         base = {"request_id": request_id, "client_ip": client_ip, "http_method": scope["method"]}
 
-        # 1. Host and Origin (DNS-rebinding defence). Done first, before any authentication state is revealed.
+        # 1. Host and Origin (DNS-rebinding defense). Done first, before any authentication state is revealed.
         host = (hdrs.get("host") or [""])[0].lower()
         if host not in {h.lower() for h in self.s.effective_allowed_hosts}:
             self.audit.emit("request_rejected", reason="bad_host", **base)

@@ -23,11 +23,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 J = "hardened_mcp/jwt_verify.py"
 M = "hardened_mcp/middleware.py"
 
-# Mutations that cannot be observed because another layer produces the same behaviour. Keeping the redundant
-# control is deliberate (defence in depth); listing it here, with the reason, keeps that honest and visible.
+# Mutations that cannot be observed because another layer produces the same behavior. Keeping the redundant
+# control is deliberate (defense in depth); listing it here, with the reason, keeps that honest and visible.
 EQUIVALENT: dict[str, str] = {
     "keys-kty-not-matched-to-alg": "PyJWT's PyJWK already rejects a key whose type does not match the algorithm "
-    "(InvalidKeyError), so our explicit check is a second line of defence against a library change.",
+    "(InvalidKeyError), so our explicit check is a second line of defense against a library change.",
 }
 
 MUTATIONS: list[tuple[str, str, str, str]] = [

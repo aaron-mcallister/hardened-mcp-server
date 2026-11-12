@@ -114,7 +114,7 @@ def test_the_author_field_is_also_treated_as_untrusted(env, idp):
     assert "](" not in author and "<b>" not in author
 
 
-# ---- the sanitiser itself -----------------------------------------------------------------------------
+# ---- the sanitizer itself -----------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize(

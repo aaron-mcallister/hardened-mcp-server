@@ -1,6 +1,6 @@
 # Threat model
 
-A short, honest model of what this server defends against, how, and what it does not. "Test" columns refer to files in `tests/`; the control catalogue is mutation-tested (`tools/mutation_check.py`).
+A short, honest model of what this server defends against, how, and what it does not. "Test" columns refer to files in `tests/`; the control catalog is mutation-tested (`tools/mutation_check.py`).
 
 ## Assets and actors
 
@@ -19,7 +19,7 @@ A short, honest model of what this server defends against, how, and what it does
 | Over-privileged callers | Per-tool scopes, deny by default for unknown methods and tool names, write scope obtained by step-up | `test_authz.py` |
 | Reading another team's findings, or learning they exist | Team comes only from the verified token; absent and forbidden are indistinguishable; search never counts other teams' data | `test_authz.py` (object-level tests) |
 | Authorization bypass by editing routing headers | Headers must match the body and are never trusted for the decision | `test_spec_conformance.py` |
-| Defect in the HTTP layer exposing a handler | Each handler re-checks scope itself (defence in depth) | `test_authz.py::test_a_tool_refuses_a_principal_without_the_scope_even_when_the_http_guard_is_bypassed` |
+| Defect in the HTTP layer exposing a handler | Each handler re-checks scope itself (defense in depth) | `test_authz.py::test_a_tool_refuses_a_principal_without_the_scope_even_when_the_http_guard_is_bypassed` |
 | Indirect prompt injection and exfiltration through finding text | Output hardening: invisible, bidirectional, and tag-block characters stripped; markup, links, images and HTML defanged; every free-text field wrapped in a per-response random boundary with a notice that the text is data | `test_output_hardening.py` |
 | Tool poisoning / "rug pull" (descriptions that change after approval) | Descriptions are static, linted, and pinned by hash in `manifest.lock.json`; CI fails on drift | `test_manifest.py` |
 | Tool and policy drifting apart (a tool shipped with no access rule) | Start-up refuses to run if served tools and declared policies differ | `test_manifest.py` |

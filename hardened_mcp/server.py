@@ -204,7 +204,7 @@ def build_app(
     mcp = build_server(store or seed_store(), registry, audit)
     verify_registry(mcp, registry)
 
-    # Defence in depth: the SDK's own Host/Origin check is enabled too. It is OFF by default for any host
+    # Defense in depth: the SDK's own Host/Origin check is enabled too. It is OFF by default for any host
     # other than loopback, so relying on the default would leave DNS-rebinding protection unset.
     transport = TransportSecuritySettings(
         enable_dns_rebinding_protection=True,

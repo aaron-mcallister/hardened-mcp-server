@@ -2,7 +2,7 @@
 
 Pinned to **MCP specification revision 2026-07-28** (authorization and security best practices pages), with RFC 6750 (bearer tokens), RFC 8707 (resource indicators), RFC 9728 (protected resource metadata) and OAuth 2.1 (draft) as the specification references them. This server is an OAuth **resource server** only. It never issues tokens, never proxies to another authorization server, and calls no other service except to fetch signing keys.
 
-Every row names the test that fails if the behaviour is removed. `tools/mutation_check.py` additionally breaks the implementation of most rows and requires the named tests to notice (see `docs/VALIDATION.md`).
+Every row names the test that fails if the behavior is removed. `tools/mutation_check.py` additionally breaks the implementation of most rows and requires the named tests to notice (see `docs/VALIDATION.md`).
 
 Authorization is optional in MCP and applies to HTTP transports only. This server is HTTP-only and always requires it. Over stdio the specification says to take credentials from the environment instead; this project does not provide a stdio mode.
 
@@ -18,7 +18,7 @@ Authorization is optional in MCP and applies to HTTP transports only. This serve
 | Insufficient scope: 403 `insufficient_scope`, `scope` listing all scopes required, `resource_metadata` present | `authz.decide`, `challenge.www_authenticate` | `test_spec_conformance.py::test_insufficient_scope_is_a_403_with_the_full_required_scope_set`, `test_authz.py::test_tool_by_scope_matrix` |
 | Step-up: the client can retry with the new scope | write scope absent from `scopes_supported`, required by the write tool | `::test_step_up_succeeds_with_the_new_scope`, `::test_metadata_advertises_only_the_minimal_scope` |
 | Servers MUST account for scope hierarchies | `authz.HIERARCHY` (`findings:write` implies `findings:read`) | `test_authz.py::test_tool_by_scope_matrix` (write-only token can read) |
-| Scope minimisation: advertise the minimum; elevate by step-up | `scopes_supported` is `findings:read` only | `::test_metadata_advertises_only_the_minimal_scope` |
+| Scope minimization: advertise the minimum; elevate by step-up | `scopes_supported` is `findings:read` only | `::test_metadata_advertises_only_the_minimal_scope` |
 | DNS rebinding: validate `Host` and `Origin` on HTTP transports | Guard checks first; SDK protection also enabled with explicit values (the SDK default is off off-loopback) | `::test_unexpected_host_header_is_refused_before_authentication`, `::test_cross_origin_requests_are_refused`, `::test_configured_origin_is_allowed` |
 | Session or state handles, if any, must not be guessable or usable by another user | The server is stateless and returns no handles; pagination and resource handles are not implemented | n/a (absent by design) |
 | 2026-07-28 routing headers (`Mcp-Method`, `Mcp-Name`) MUST match the body | `McpGuard` rejects mismatches (400, JSON-RPC -32020) and never authorizes from the headers | `::test_header_naming_a_harmless_method_cannot_smuggle_a_privileged_call`, `::test_header_naming_a_permitted_tool_cannot_smuggle_a_forbidden_one` |
@@ -27,7 +27,7 @@ Authorization is optional in MCP and applies to HTTP transports only. This serve
 ## Not applicable, because this is a resource server
 
 - **Confused deputy** (the spec's concern for MCP servers that proxy to third-party authorization servers with static client IDs): no proxying, no consent screens, no client registration here.
-- **Client ID Metadata Documents, Dynamic Client Registration, PKCE, the authorization and token endpoints, the RFC 9207 `iss` response parameter:** these are client and authorization-server behaviours. The example realm in `deploy/keycloak` does not exercise them; it uses the client-credentials grant.
+- **Client ID Metadata Documents, Dynamic Client Registration, PKCE, the authorization and token endpoints, the RFC 9207 `iss` response parameter:** these are client and authorization-server behaviors. The example realm in `deploy/keycloak` does not exercise them; it uses the client-credentials grant.
 - **SSRF through authorization-server discovery:** the server's only outbound request is the signing-key fetch from an operator-configured HTTPS URL (no redirects, size and time limits, rate-limited refresh). See `test_keys_and_config.py`.
 
 ## Findings from probing the official SDK (version 2.3.0)

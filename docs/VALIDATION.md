@@ -23,7 +23,7 @@ Two things the first full run found, which is why the check exists:
 - Two controls (the Origin check and the up-front Content-Length check) were silently backed by another layer (the SDK's own check, and the streamed-size check), so the tests could not tell whether the guard's own check existed. The tests now assert the guard's own audit reason, and the up-front check is tested with a request whose body is never read.
 - While the tests were being written, they exposed that the pinned manifest silently omitted input schemas and annotations (a serialization alias bug), which would have made the "descriptions are pinned" claim weaker than stated. Fixed, and covered by `test_tool_inputs_are_constrained` and `test_write_tool_is_not_marked_read_only_and_read_tools_are`.
 
-**Documented equivalent mutant:** `keys-kty-not-matched-to-alg`. PyJWT already rejects a key whose type does not match the algorithm, so our explicit check cannot be observed. It is kept as a second line of defence against a library change.
+**Documented equivalent mutant:** `keys-kty-not-matched-to-alg`. PyJWT already rejects a key whose type does not match the algorithm, so our explicit check cannot be observed. It is kept as a second line of defense against a library change.
 
 Mutation testing has limits: it tests the mutations someone thought of. It is evidence that the listed controls are covered, not that no other flaw exists.
 
@@ -40,7 +40,7 @@ Mutation testing has limits: it tests the mutations someone thought of. It is ev
 
 - **No live Claude (or other) MCP client.** Requests in the tests are hand-built to the 2026-07-28 wire format. Interoperability with real clients' OAuth flows (metadata discovery, client registration, PKCE, step-up) is untested here.
 - **No live identity provider.** Tokens come from a test fixture that mints RS256/ES256 tokens, including malicious variants. `deploy/keycloak` was **not run** (no container runtime was available where this was built); `tests/test_deploy_example.py` only checks the realm file offline against the server's expectations. Treat it as an example to adapt, and verify the token claims (`aud`, `scope`, `team`, `jti`) from your own provider.
-- **No TLS, no proxy, no multi-replica behaviour**, no load or performance testing, no fuzzing beyond the malformed-input cases in the tests.
+- **No TLS, no proxy, no multi-replica behavior**, no load or performance testing, no fuzzing beyond the malformed-input cases in the tests.
 - **Prompt-injection resistance of any model.** Tests verify that the server's output is sanitized and delimited as designed. They cannot show that a model will not follow instructions in text that remains.
 - **No independent security review.** This is one person's work, assisted by an AI tool, and should be reviewed as such.
 - **Python 3.10** (declared minimum) and non-Linux platforms.

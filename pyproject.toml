@@ -1,7 +1,7 @@
 [project]
 name = "hardened-mcp-server"
 version = "0.1.0"
-description = "A reference MCP server where every security control is a tested, spec-mapped behaviour."
+description = "A reference MCP server where every security control is a tested, spec-mapped behavior."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"

@@ -1,4 +1,4 @@
-"""Behaviours the MCP authorization spec (revision 2026-07-28) and RFCs 6750, 8707 and 9728 require of a
+"""Behaviors the MCP authorization spec (revision 2026-07-28) and RFCs 6750, 8707 and 9728 require of a
 protected MCP server, plus the transport-level checks that protect it. Section references are in
 docs/SPEC-CONFORMANCE.md."""
 
@@ -22,7 +22,7 @@ def test_protected_resource_metadata_is_public_and_correct(env):
 
 
 def test_metadata_advertises_only_the_minimal_scope(env):
-    """Scope minimisation: the write scope is obtained by step-up, not advertised up front."""
+    """Scope minimization: the write scope is obtained by step-up, not advertised up front."""
     doc = env.client.get("/.well-known/oauth-protected-resource/mcp").json()
     assert doc["scopes_supported"] == [READ]
     assert WRITE not in json.dumps(doc)
@@ -214,7 +214,7 @@ def test_deeply_nested_json_does_not_crash_the_server(env, idp):
 
 
 def test_header_naming_a_harmless_method_cannot_smuggle_a_privileged_call(env, idp):
-    """Header says tools/list, body says add_triage_note, token is read-only: refused, and not authorised by the header."""
+    """Header says tools/list, body says add_triage_note, token is read-only: refused, and not authorized by the header."""
     response = rpc(
         env.client,
         "tools/call",

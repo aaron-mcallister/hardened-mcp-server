@@ -10,7 +10,7 @@ client --HTTPS--> [TLS-terminating proxy] --HTTP, loopback or private network-->
                                                                       +--HTTPS--> identity provider (JWKS only)
 ```
 
-The server binds to `127.0.0.1:8080` by default. It does not speak TLS itself and does not trust `X-Forwarded-*` headers (`proxy_headers=False`). Configure the proxy to pass the original `Host` header, because the Host check is the DNS-rebinding defence; set `HMCP_ALLOWED_HOSTS` if the public host name differs from `HMCP_RESOURCE_URL`.
+The server binds to `127.0.0.1:8080` by default. It does not speak TLS itself and does not trust `X-Forwarded-*` headers (`proxy_headers=False`). Configure the proxy to pass the original `Host` header, because the Host check is the DNS-rebinding defense; set `HMCP_ALLOWED_HOSTS` if the public host name differs from `HMCP_RESOURCE_URL`.
 
 ## Configuration (environment, prefix `HMCP_`)
 

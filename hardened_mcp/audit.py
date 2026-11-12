@@ -104,7 +104,7 @@ def verify_chain(lines: Iterable[str]) -> tuple[bool, int | None]:
 
 
 def arg_shape(arguments: dict[str, Any] | None) -> dict[str, int]:
-    """Describe arguments without recording them: name -> length of the serialised value."""
+    """Describe arguments without recording them: name -> length of the serialized value."""
     if not isinstance(arguments, dict):
         return {}
     return {str(k)[:64]: len(json.dumps(v, default=str)) for k, v in list(arguments.items())[:32]}
