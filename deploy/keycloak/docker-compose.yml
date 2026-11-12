@@ -1,0 +1,15 @@
+# EXAMPLE ONLY: a local identity provider for trying the server end to end. See README.md in this directory.
+# It runs Keycloak in development mode on loopback, with throwaway credentials. Do not expose it.
+services:
+  keycloak:
+    # Pin a specific version (and, for anything real, a digest). This one has not been pulled or run by the
+    # author of this repository; see docs/VALIDATION.md.
+    image: quay.io/keycloak/keycloak:26.4.0
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin-demo-only
+    ports:
+      - "127.0.0.1:9000:8080" # loopback only
+    volumes:
+      - ./realm-hms.json:/opt/keycloak/data/import/realm-hms.json:ro
