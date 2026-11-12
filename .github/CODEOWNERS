@@ -1,0 +1,7 @@
+# The guard, the authorization policy and the tests that pin them are the controls. If this repository ever
+# has more than one maintainer, enforce these with a ruleset (require a pull request and code owner review).
+/hardened_mcp/  @aaron-mcallister
+/tests/         @aaron-mcallister
+/tools/         @aaron-mcallister
+/.github/       @aaron-mcallister
+/deploy/        @aaron-mcallister
