@@ -1,6 +1,8 @@
 # hardened-mcp-server
 
-A small [Model Context Protocol](https://modelcontextprotocol.io) server in Python that exists to show what a **secure** MCP server looks like in practice: every security control is a behaviour with a test, mapped to the authorization specification, and the tests themselves are checked by deliberately breaking each control.
+[![CI](https://github.com/aaron-mcallister/hardened-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/aaron-mcallister/hardened-mcp-server/actions/workflows/ci.yml)
+
+A small [Model Context Protocol](https://modelcontextprotocol.io) server in Python that exists to show what a **secure** MCP server looks like in practice: every security control is a behavior with a test, mapped to the authorization specification, and the tests themselves are checked by deliberately breaking each control.
 
 The domain is a read-mostly "security findings" service (list, get, search, and add a triage note), with fictional data. The point is not the findings; it is the controls around them.
 
@@ -12,7 +14,7 @@ The domain is a read-mostly "security findings" service (list, get, search, and 
 |---|---|---|
 | Authentication | OAuth 2.1 **resource server**: JWT validation with algorithm allow-list, pinned issuer, required claims, audience bound to this server (RFC 8707), key confusion and `jku`/`x5u`/`jwk` header attacks refused | `jwt_verify.py`, `keys.py` |
 | Discovery | RFC 9728 protected resource metadata, correct `WWW-Authenticate` challenges (401 vs 403, `insufficient_scope` with the full scope set) | `challenge.py`, `middleware.py` |
-| Authorization | Per-tool scopes, step-up for the write scope, scope hierarchy, deny by default for unknown methods and tools, handlers re-check (defence in depth), **object-level** team isolation with no existence oracle | `authz.py`, `data.py` |
+| Authorization | Per-tool scopes, step-up for the write scope, scope hierarchy, deny by default for unknown methods and tools, handlers re-check (defense in depth), **object-level** team isolation with no existence oracle | `authz.py`, `data.py` |
 | Transport hygiene | Host and Origin checks (DNS rebinding), POST only, content type, declared and streamed body caps, strict JSON-RPC shape, routing headers must match the body and are never trusted | `middleware.py` |
 | Untrusted data | Free text from findings is treated as hostile: invisible and bidi characters stripped, markup defanged, per-response random boundary and notice | `sanitize.py` |
 | Tool integrity | Tool descriptions are static, linted, hashed and pinned; the server will not start if a tool lacks an access policy | `manifest.py`, `server.py` |

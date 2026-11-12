@@ -65,7 +65,7 @@ def test_file_source_fails_closed_on_missing_file(tmp_path):
     assert run(FileKeySource(str(tmp_path / "absent.json")).get_key("k", "RS256")) is None
 
 
-# ---- HTTPS source: SSRF-shaped and amplification-shaped behaviours ------------------------------------
+# ---- HTTPS source: SSRF-shaped and amplification-shaped behaviors ------------------------------------
 
 
 def test_https_source_refuses_plain_http_off_loopback():

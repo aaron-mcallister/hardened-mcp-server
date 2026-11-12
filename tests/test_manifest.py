@@ -104,6 +104,6 @@ def test_changing_a_description_changes_the_hash(monkeypatch):
 
 
 def test_server_instructions_are_not_used():
-    """The initialise-time `instructions` string is another place to hide text for the model."""
+    """The initialize-time `instructions` string is another place to hide text for the model."""
     server = build_server(FindingStore([]), PolicyRegistry())
     assert not getattr(server, "instructions", None)
